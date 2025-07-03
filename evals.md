@@ -1,3 +1,5 @@
+https://hamel.dev/blog/posts/evals-faq/
+
 AI Evals at Pycon this year
 # Evaluation Metrics & Methodology
 
