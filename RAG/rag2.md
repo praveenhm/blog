@@ -20,3 +20,17 @@ The agentic layer is outside of the vector database, the vector db just finds th
 HyDE Query
 Fine Tuned LLM ( Optional) , built using continued Pretraining : https://docs.unsloth.ai/basics/continued-pretraining
 User query converted into HyDE Query, then sent to FineTuned LLM, then the output is sent to Vector DB (PostgreSQL) for cosine similarity -> Reranker -> LLM model (Deepseek,Geminie etc)
+
+
+####Agentic RAG
+"Agentic retrieval layer": This is the "research assistant" part. It's a layer of logic, powered by a Large Language Model (LLM), that sits before the final answer generation. Its only job is to be smart about retrieving information.
+
+"Spinoff multiple queries": Just like our assistant, the agent breaks down a complex user query ("Compare A and B") into multiple, simpler sub-queries ("Find A", "Find B", "Find context C").
+
+"Evaluate them, do additional retrievals": The agent looks at the results of its first search. If the information is poor or incomplete, it can decide to try again with a different query. For example, if "Tesla Model S battery" returned nothing, it might try "Tesla vehicle battery specifications" instead.
+
+"Access to semantic and keyword search tools": This is the agent's toolkit.
+Semantic Search (Vector Search): Finds documents based on meaning and context. Great for conceptual questions. ("What are the philosophical implications of AI?")
+Keyword Search (like BM25): Finds documents based on exact word matches. Crucial for specific names, acronyms, or codes. ("Find documents mentioning 'Project X-734'.")
+
+"Not at the mercy of a combined ranking score": Standard hybrid search runs both a vector search and a keyword search simultaneously and then uses a formula (e.g., 60% vector score + 40% keyword score) to create a final ranked list. This formula is static. Agentic RAG is smarter. The agent decides which tool is best. For a query with a product code, it might choose to rely 100% on the keyword search tool. For a conceptual query, it might rely 100% on the semantic search tool. It has flexibility.
